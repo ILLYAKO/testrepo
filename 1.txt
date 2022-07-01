@@ -1,0 +1,85 @@
+testapi@block64.com
+]c2s,NO8$?E,wzUr@)4r
+
+COM-1138-2.54.0
+
+id = 107474643645587052509
+
+adminId
+116024861569599098807
+
+{
+  "error": {
+    "code": 403,
+    "message": "Request had insufficient authentication scopes.",
+    "errors": [
+      {
+        "message": "Insufficient Permission",
+        "domain": "global",
+        "reason": "insufficientPermissions"
+      }
+    ],
+    "status": "PERMISSION_DENIED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "ACCESS_TOKEN_SCOPE_INSUFFICIENT",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "admin.googleapis.com",
+          "method": "ccc.hosted.frontend.directory.v1.DirectoryOrgunits.List"
+        }
+      }
+    ]
+  }
+}
+
+
+
+
+'_id'
+'DisplayName'
+'PrimaryEmail'
+
+'PrimaryEmail'
+`PrimaryEmail`
+
+I created table in 
+    private function migrateGsuite()
+    {
+        // Create USER table
+        $this->db->query("
+	        CREATE TABLE IF NOT EXISTS `_Gsuite_Users` (
+	            `_id` varchar(40) NOT NULL UNIQUE,
+	            `DisplayName` varchar(128),
+	            `PrimaryEmail` varchar(128),
+	            PRIMARY KEY (_id)
+	        ) ENGINE=InnoDB CHARACTER SET = 'utf8' COLLATE utf8_unicode_ci
+	    ");
+	}
+
+and collect $users
+            foreach ($userResults as $user) {
+                $users[] = [
+                    '_id'                  => $user['id'],
+                    'DisplayName'          => $user['name']['fullName'],
+                    'PrimaryEmail'        => $user['primaryEmail']
+                ];
+and insert users in table
+            if (!empty($users)) {
+                $this->db->insert_batch('_Gsuite_Users', $users, true, $this->record_limit);
+            }
+
+and got error 
+php-log_1        | ERROR - 2022-02-24 15:02:57 --> Query error: Unknown column 'PrimaryEmail' in 'field list' - Invalid query: INSERT INTO `_Gsuite_Users` (`DisplayName`, `PrimaryEmail`, `_id`) VALUES ('Craig Bator','craig.bator@block64.com','109551121715536677457'), ('Dean Williams','dean.williams@block64.com','115809473692515085037'), ('Debbie Jelic','debbie.jelic@block64.com','103735556771261434056'), .....
+
+Maybe do you have idea what is wrong?
+
+PS C:\_projects\combine_v2> git merge COM-1138-2.54.0
+Auto-merging combineapp/models/oauth/Oauth_implicit_flow_manager_model.php
+Auto-merging combineapp/models/oauth/Oauth_provider_base_model.php
+CONFLICT (content): Merge conflict in combineapp/models/oauth/Oauth_provider_base_model.php
+Auto-merging combineapp/models/oauth/Oauth_provider_factory_model.php
+Auto-merging combineapp/models/oauth/Oauth_providers_model.php
+CONFLICT (content): Merge conflict in combineapp/models/oauth/Oauth_providers_model.php
+Automatic merge failed; fix conflicts and then commit the result.
